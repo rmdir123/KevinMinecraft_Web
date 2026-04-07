@@ -6,7 +6,8 @@ const CreateServer = () => {
         serverName: '',
         minecraftVersion: '1.20.4',
         gameMode: 'survival',
-        maxPlayers: 20
+        maxPlayers: 20,
+        host: 'Compute Server1'
     });
     const [operators, setOperators] = useState(['']);
 
@@ -29,13 +30,40 @@ const CreateServer = () => {
         setOperators(newOperators);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Filter out empty operator names
         const validOperators = operators.filter(op => op.trim() !== '');
-        const submitData = { ...formData, operators: validOperators };
+        
+        const submitData = {
+            Server_name: formData.serverName,
+            Minecraft_version: formData.minecraftVersion,
+            Max_players: parseInt(formData.maxPlayers, 10),
+            Game_mode: formData.gameMode,
+            Host: formData.host,
+            Operator_usernames: validOperators
+        };
+        
         console.log('Server Data Submitted:', submitData);
-        alert(`Server "${formData.serverName}" created successfully! Check console for details.`);
+
+        try {
+            const response = await fetch('http://localhost:5000/parameter/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(submitData),
+            });
+
+            if (response.ok) {
+                alert(`Server "${formData.serverName}" created successfully! Check console for details.`);
+            } else {
+                alert('Failed to create server. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error submitting server data:', error);
+            alert('An error occurred while creating the server.');
+        }
     };
 
     return (
@@ -88,19 +116,34 @@ const CreateServer = () => {
                         </div>
                     </div>
 
-                    <div className="form-group">
-                        <label>Game Mode</label>
-                        <div className="custom-select-wrapper">
-                            <select
-                                name="gameMode"
-                                value={formData.gameMode}
-                                onChange={handleChange}
-                            >
-                                <option value="survival">Survival</option>
-                                <option value="creative">Creative</option>
-                                <option value="adventure">Adventure</option>
-                                <option value="spectator">Spectator</option>
-                            </select>
+                    <div className="form-group row-group">
+                        <div className="form-group-half">
+                            <label>Game Mode</label>
+                            <div className="custom-select-wrapper">
+                                <select
+                                    name="gameMode"
+                                    value={formData.gameMode}
+                                    onChange={handleChange}
+                                >
+                                    <option value="survival">Survival</option>
+                                    <option value="creative">Creative</option>
+                                    <option value="adventure">Adventure</option>
+                                    <option value="spectator">Spectator</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="form-group-half">
+                            <label>Host</label>
+                            <div className="custom-select-wrapper">
+                                <select
+                                    name="host"
+                                    value={formData.host}
+                                    onChange={handleChange}
+                                >
+                                    <option value="Compute Server1">Compute Server1</option>
+                                    <option value="Compute Server2">Compute Server2</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
