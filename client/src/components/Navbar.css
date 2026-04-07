@@ -1,0 +1,149 @@
+.navbar {
+  background-color: #1a1a2e;
+  /* Dark premium tone */
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 24px;
+}
+
+.navbar-logo {
+  color: #fff;
+  align-items: center;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: flex;
+  gap: 10px;
+  transition: color 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.navbar-logo:hover {
+  color: #e94560;
+  /* Vibrant accent color */
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  text-align: center;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links {
+  color: #e0e0e0;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #e94560;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+.nav-links:hover {
+  color: #fff;
+}
+
+.nav-links:hover:after {
+  width: 100%;
+}
+
+.navbar-actions .btn-primary {
+  background-color: #e94560;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
+}
+
+.navbar-actions .btn-primary:hover {
+  background-color: #ff5e7e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(233, 69, 96, 0.6);
+}
+
+.navbar-actions .btn-primary:active {
+  transform: translateY(0);
+}
+
+/* --- Mobile Responsive --- */
+.menu-icon {
+  display: none;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 960px) {
+  .menu-icon {
+    display: block;
+    position: absolute;
+    right: 24px;
+    top: 24px;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 2rem;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 80px;
+    left: -100%;
+    opacity: 0;
+    transition: all 0.5s ease;
+    background-color: #1a1a2e;
+  }
+
+  .nav-menu.active {
+    background: #1a1a2e;
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
+
+  .nav-item {
+    margin: 1.5rem 0;
+  }
+
+  .navbar-actions {
+    display: none;
+  }
+}

@@ -1,23 +1,16 @@
-import logo from './logo.svg';
+import Navbar from './components/Navbar';
+import CreateServer from './pages/CreateServer/CreateServer';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{ backgroundColor: '#0f0f1a', minHeight: '100vh', color: 'white' }}>
+      <Navbar />
+      <div style={{ padding: '1rem', textAlign: 'center' }}>
+        <h1>Welcome to KevinServ!</h1>
+        <p style={{ color: '#a0a0bd' }}>Minecraft Server Host.</p>
+      </div>
+      <CreateServer />
     </div>
   );
 }
