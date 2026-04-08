@@ -34,7 +34,7 @@ const CreateServer = () => {
         e.preventDefault();
         // Filter out empty operator names
         const validOperators = operators.filter(op => op.trim() !== '');
-        
+
         const submitData = {
             Server_name: formData.serverName,
             Minecraft_version: formData.minecraftVersion,
@@ -43,11 +43,11 @@ const CreateServer = () => {
             Host: formData.host,
             Operator_usernames: validOperators
         };
-        
+
         console.log('Server Data Submitted:', submitData);
 
         try {
-            const response = await fetch('http://localhost:5000/parameter/', {
+            const response = await fetch('/parameter/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
